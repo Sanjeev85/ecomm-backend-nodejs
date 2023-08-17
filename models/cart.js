@@ -9,6 +9,7 @@ const cartSchema = new mongoose.Schema(
         quantity: Number,
       },
     ],
+    default: [],
   },
   {
     timestamps: true,

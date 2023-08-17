@@ -1,6 +1,7 @@
 import User from '../models/user.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import Cart from '../models/cart.js';
 
 export const register = async (req, res, next) => {
   try {
@@ -12,7 +13,11 @@ export const register = async (req, res, next) => {
       ...req.body,
       password: hash,
     });
-    await newUser.save();
+    const user = await newUser.save();
+    const cart = new Cart({ user: user._id });
+
+    await cart.save();
+
     return res.status(200).send('User Created Successfully !! ');
   } catch (err) {
     return res.status(404).send({ message: err.message });

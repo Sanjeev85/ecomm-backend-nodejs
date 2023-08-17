@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { orderStatus, paymentStatus } from '../enums/enum';
 
 const orderSchema = mongoose.Schema(
   {
@@ -10,10 +9,10 @@ const orderSchema = mongoose.Schema(
         quantity: Number,
       },
     ],
+    default: [],
     orderDate: { type: Date, default: Date.now },
     status: {
       type: String,
-      enum: Object.values(orderStatus),
       default: 'Pending',
     },
     shippingAddress: {
@@ -26,7 +25,6 @@ const orderSchema = mongoose.Schema(
     paymentMethod: String,
     paymentStatus: {
       type: String,
-      enum: Object.values(paymentStatus),
       default: 'Pending',
     },
     totalAmount: Number,

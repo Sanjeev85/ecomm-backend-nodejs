@@ -6,7 +6,12 @@ import {
 } from '../controllers/product.controller.js';
 
 const router = express.Router();
-router.get('/:id', getProductById);
-router.get('/category/:id', getProductsByCategoryId);
+//find product by productId
+router.get('/:productId', getProductById);
+
+//all products by categoryId
+router.get('/category/:categoryId', getProductsByCategoryId);
+
+// create product
 router.post('/', addProduct);
 export default router;

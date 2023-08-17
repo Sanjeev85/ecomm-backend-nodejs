@@ -7,6 +7,7 @@ import authRoute from './routes/auth.route.js';
 import { verifyToken } from './middleware/jwt.js';
 import categoryRoute from './routes/catergory.route.js';
 import productRoute from './routes/product.route.js';
+import userRoute from './routes/user.route.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -33,6 +34,7 @@ dotenv.config();
 app.use('/api/auth', authRoute);
 app.use('/api/categories', verifyToken, categoryRoute);
 app.use('/api/products', verifyToken, productRoute);
+app.use('/api/user', verifyToken, userRoute);
 
 app.listen(PORT, () => {
   connect();
