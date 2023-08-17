@@ -1,0 +1,40 @@
+@BASE_URL=http://localhost:5000/api
+@TOKEN=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGUzNDAyYjlmOTc3ZmJlN2UyOWYyZiIsImlhdCI6MTY5MjI4OTUwOH0.OYmyqhfF0Il2C4wdVU-GA-a6fjiv7QedPSrtpjOLE6g
+@json=application/json
+
+###
+#! Get all categories
+GET {{BASE_URL}}/categories/
+Authorization: {{TOKEN}}
+
+###
+#! login
+POST {{BASE_URL}}/auth/login
+Content-Type: {{json}}
+
+{
+    "email": "sanjeev@email.com",
+    "password": "12345"
+}
+
+###
+
+POST {{BASE_URL}}/auth/register
+Content-Length: {{json}}
+
+{
+    "firstName": "Sanjeev",
+    "lastName": "Choubey",
+    "email": "sanjeev@email.com",
+    "password": "12345"
+}
+
+
+###
+
+GET {{BASE_URL}}/products/ssdf454
+Authorization: {{TOKEN}}
+
+###
+GET {{BASE_URL}}/products/category/64de3402b9f977fbe7e29f2f
+Authorization: {{TOKEN}}
