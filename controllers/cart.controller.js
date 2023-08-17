@@ -1,12 +1,7 @@
-import mongoose from 'mongoose';
 import Cart from '../models/cart.js';
-import Product from '../models/product.js';
-import product from '../models/product.js';
-
 // view cart
 export const getCartItemsByUser = async (req, res, next) => {
   const userId = req.params.userId;
-  console.log(userId);
   try {
     const cartItems = await Cart.findOne({ user: userId }).populate({
       path: 'products.product',

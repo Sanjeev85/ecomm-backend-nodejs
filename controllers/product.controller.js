@@ -29,7 +29,6 @@ export const getProductById = async (req, res, next) => {
 
     return res.status(200).send({ product: product });
   } catch (err) {
-    console.log(productId);
     return res.status(404).send({ message: err.message });
   }
 };

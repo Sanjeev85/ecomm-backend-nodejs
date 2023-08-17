@@ -29,15 +29,20 @@ export const placeOrder = async (req, res, next) => {
     if (!cartItemOfPlacedOrder)
       return res.status(404).send({ message: 'Cart Item Not Found' });
 
-    // get Product whose order is placed
     const productWhoseOrderIsPlaced = cartItemOfPlacedOrder.products.filter(
-      (product) => product._id.toString() === productId
+      (currElement) => {
+        return currElement.product._id.toString() === productId;
+      }
     );
 
     //remove product from cartItems
     cartItemOfPlacedOrder.products = cartItemOfPlacedOrder.products.filter(
-      (product) => product._id.toString() !== productId
+      (currElement) => currElement.product._id.toString() !== productId
     );
+
+    const totalAmount =
+      productWhoseOrderIsPlaced[0].product.price *
+      productWhoseOrderIsPlaced[0].quantity;
 
     // create new Order Schema
     const addProductToOrder = new Order({
@@ -49,8 +54,7 @@ export const placeOrder = async (req, res, next) => {
       shippingAddress: req.body.shippingAddress,
       paymentMethod: req.body.paymentMethod,
       paymentStatus: 'Successfull',
-      totalAmount:
-        productWhoseOrderIsPlaced.price * productWhoseOrderIsPlaced.quantity,
+      totalAmount: totalAmount,
     });
 
     // added order to order schema
@@ -62,7 +66,6 @@ export const placeOrder = async (req, res, next) => {
     });
 
     //add order to order history
-
     await addedToOrderHistory.save();
     // updated cartItem
     await cartItemOfPlacedOrder.save();
