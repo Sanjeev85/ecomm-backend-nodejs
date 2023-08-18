@@ -12,6 +12,10 @@
 ### UserEndpoints For various actions 
   ![image](https://github.com/Sanjeev85/ecomm-backend-nodejs/assets/54615519/b55f230b-2e0c-4367-be8c-a33e49c0addf)
 
+### Click on Lock Icon to add bearer token on swagger-ui
+![image](https://github.com/Sanjeev85/ecomm-backend-nodejs/assets/54615519/b5abf7c2-95ea-4b09-85e6-1357c9dda6d1)
+
+
 
 #### All Routes are available in  routes.http file
 
