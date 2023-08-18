@@ -23,7 +23,8 @@
   3. yarn  (For installing all libraries)
   4. Add PORT and SECRET_KEY in .env file
   5. In linux start mongod service if not started already
-  6. yarn start
+  6. yarn start (to start server)
+  7. Navigate to http://localhost:5000/api-docs/#/ for swagger-ui 
 
 ### Used compression for decreasing response size also added ratelimiter of 100 request / 15 minutes
 
