@@ -1,5 +1,5 @@
 @BASE_URL=http://localhost:5000/api
-@TOKEN=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGU4OWY2NDEzZTgwMWM4ZjczZjI4MiIsImlhdCI6MTY5MjMwNjAwMn0.XACxIGgh2eSNquLJJNnVEcsrC11Dd8G3Ax-ZXK67VCI
+@TOKEN=Bearer 
 @json=application/json
 
 
