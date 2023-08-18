@@ -6,10 +6,11 @@ export const createCategory = async (req, res, next) => {
     const newCategory = new Category({
       ...req.body,
     });
-    const category = await Category.find({ name: req.body.name });
+    const category = await Category.findOne({ name: req.body.name });
 
     if (category)
-      return res.status(404).send({ message: 'category already exists' });
+      return res.status(400).send({ message: 'category already exists' });
+
     await newCategory.save();
     return res.status(200).send({ message: 'Category created !!!' });
   } catch (err) {

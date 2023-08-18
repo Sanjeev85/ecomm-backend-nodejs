@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import gzip from 'gzip';
 import authRoute from './routes/auth.route.js';
 import { verifyToken } from './middleware/jwt.js';
 import categoryRoute from './routes/catergory.route.js';
@@ -10,6 +9,7 @@ import productRoute from './routes/product.route.js';
 import userRoute from './routes/user.route.js';
 import rateLimit from 'express-rate-limit';
 import setupSwagger from './swagger.js';
+import compression from 'compression';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,6 +36,7 @@ app.use(limiter);
 app.use(cors());
 app.use(express.json());
 dotenv.config();
+app.use(compression());
 
 setupSwagger(app);
 

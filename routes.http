@@ -1,59 +1,59 @@
 @BASE_URL=http://localhost:5000/api
-@TOKEN=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGU4OWY2NDEzZTgwMWM4ZjczZjI4MiIsImlhdCI6MTY5MjMwNjAwMn0.XACxIGgh2eSNquLJJNnVEcsrC11Dd8G3Ax-ZXK67VCI
+@TOKEN= Enter token generated on login 
 @json=application/json
 
 
-# ! register user
+# regiser user
 ###
 POST {{BASE_URL}}/auth/register
 Content-Type: {{json}}
 
 {
-    "firstName": "Sanjeev",
-    "lastName": "Choubey",
-    "email": "sanjeev@singer.com",
+    "firstName": "User2",
+    "lastName": "user2 lastname",
+    "email": "email1@singer.com",
     "password": "12345"
 }
 
 
 
-# !
+# login
 ### 
 post {{BASE_URL}}/auth/login
 Content-Type: {{json}}
 
 {
-    "email": "sanjeev@email.com",
+    "email": "email1@singer.com",
     "password": "12345"
 }
 
 
-#! get all categories
+# get all categories list
 ###
 get {{BASE_URL}}/categories/
 Authorization: {{TOKEN}}
 
 
-#! add catgory
+# create a category
 ###
 post {{BASE_URL}}/categories/
 Authorization: {{TOKEN}}
 Content-Type: {{json}}
 
 {
-    "name": "travel"
+    "name": "fashion"
 }
 
 
-#! add product
+# add product in products collection
 ###
 post {{BASE_URL}}/products/
 Authorization: {{TOKEN}}
 Content-Type: {{json}}
 
  {
-    "name": "Product 3",
-    "description": "Description for Product 3",
+    "name": "Product 2",
+    "description": "Description for Product 2",
     "price": 19.99,
     "category": "fashion",
     "stockQuanity": 100,
@@ -63,37 +63,48 @@ Content-Type: {{json}}
 
 
 
-# ! all product in cart by userId
+# find All Products in a cart by userId
 # /userid
 ###
-get {{BASE_URL}}/user/cart/64de90ae854dc37c0493e742
+get {{BASE_URL}}/user/cart/64df2243c3746f359a76d96f
 Authorization: {{TOKEN}}
 
 
-# * update cart "inc" for increment "dec" for decrement
-/:userid/:flag
+# Add Product To Cart By UserId
 ###
-post {{BASE_URL}}/user/cart/64de90ae854dc37c0493e742/dec
+POST {{BASE_URL}}/user/cart/64df2243c3746f359a76d96f/addProduct
 Authorization: {{TOKEN}}
 Content-Type: {{json}}
 
 {
-    "productId":"64de859f07ca9b890d455ee2",
-    "quantity": 1
+    "productId":"64df2269c3746f359a76d978",
+    "quantity": 10
+}
+
+#  update cart "inc" for increment "dec" for decrement
+# /:userid/:flag
+###
+post {{BASE_URL}}/user/cart/64df2243c3746f359a76d96f/inc
+Authorization: {{TOKEN}}
+Content-Type: {{json}}
+
+{
+    "productId":"64df2269c3746f359a76d978",
+    "quantity": 15
 }
 
 #! remove product from cart
 #* userId/productId
 ###
-DELETE {{BASE_URL}}/user/cart/64de90ae854dc37c0493e742/64de93665738084bb9eae885
+DELETE {{BASE_URL}}/user/cart/64df2243c3746f359a76d96f/64df2269c3746f359a76d978
 Authorization: {{TOKEN}}
 
 
 #! place order
-:userid/:productid
+# :userid/:productid
 
 ###
-post {{BASE_URL}}/user/order/64de90ae854dc37c0493e742/placeOrder/64de859f07ca9b890d455ee2
+post {{BASE_URL}}/user/order/64df2243c3746f359a76d96f/placeOrder/64df2269c3746f359a76d978
 Authorization: {{TOKEN}}
 Content-Type: {{json}}
 
@@ -109,7 +120,29 @@ Content-Type: {{json}}
 }
 
 
-OrderHistory by userId
+# OrderHistory by userId
 ### 
-get {{BASE_URL}}/user/orderhistory/64de90ae854dc37c0493e742
+get {{BASE_URL}}/user/orderhistory/64df2243c3746f359a76d96f
+Authorization: {{TOKEN}}
+
+
+# order by id
+###
+get {{BASE_URL}}/user/order/64df2a029fce2150a130a3b4
+Authorization: {{TOKEN}}
+
+# get all categories
+###
+get {{BASE_URL}}/categories
+Authorization: {{TOKEN}}
+
+
+#get products based on categoryID
+###
+get {{BASE_URL}}/products/category/64df2260c3746f359a76d975
+Authorization: {{TOKEN}}
+
+#get product by productid
+###
+get {{BASE_URL}}/products/64df2269c3746f359a76d978
 Authorization: {{TOKEN}}

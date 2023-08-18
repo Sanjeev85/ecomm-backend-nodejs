@@ -7,7 +7,7 @@ export const getOrderById = async (req, res, next) => {
 
   try {
     const orderDetails = await Order.findById(orderId);
-    if (!orderDetails) throw Error('Invalid Order Id');
+    if (!orderDetails) return res.status(404).send('Order not found');
 
     return res.status(200).send({ orderDetails: orderDetails });
   } catch (err) {
@@ -26,6 +26,7 @@ export const placeOrder = async (req, res, next) => {
         model: 'Product',
       }
     );
+
     if (!cartItemOfPlacedOrder)
       return res.status(404).send({ message: 'Cart Item Not Found' });
 
@@ -61,7 +62,7 @@ export const placeOrder = async (req, res, next) => {
     const order = await addProductToOrder.save();
 
     const addedToOrderHistory = new OrderHistory({
-      orderId: order._id,
+      orders: order._id,
       user: userId,
     });
 

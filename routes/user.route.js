@@ -84,8 +84,8 @@ userRoute.get('/order/:orderId', getOrderById);
  *     responses:
  *       '200':
  *         description: Order placed successfully
- *       '400':
- *         description: Bad request
+ *       '404':
+ *         description: Cart Item Not Found
  *       '500':
  *         description: Internal server error
  */
@@ -107,6 +107,8 @@ userRoute.post('/order/:userId/placeOrder/:productId', placeOrder);
  *     responses:
  *       '200':
  *         description: Successfully retrieved order history
+ *       '404':
+ *         description: No Order history for this user
  *       '500':
  *         description: Internal server error
  */
@@ -154,8 +156,6 @@ userRoute.get('/orderhistory/:userId', getOrderHistoryByUser);
  *     responses:
  *       '200':
  *         description: Product added to cart successfully
- *       '400':
- *         description: Bad request
  *       '500':
  *         description: Internal server error
  */
@@ -177,6 +177,8 @@ userRoute.post('/cart/:userId/addProduct', addProductToCart);
  *     responses:
  *       '200':
  *         description: Successfully retrieved cart items
+ *       '400':
+ *         description: Required quantity cannot be fullfilled
  *       '500':
  *         description: Internal server error
  */
@@ -215,8 +217,8 @@ userRoute.get('/cart/:userId', getCartItemsByUser);
  *     responses:
  *       '200':
  *         description: Cart item quantity updated successfully
- *       '400':
- *         description: Bad request
+ *       '404':
+ *         description: Product not found in the cart
  *       '500':
  *         description: Internal server error
  */
@@ -244,8 +246,8 @@ userRoute.post('/cart/:userId/:flag', updateQuantityOfProduct);
  *     responses:
  *       '200':
  *         description: Product removed from cart successfully
- *       '400':
- *         description: Bad request
+ *       '404':
+ *         description: Item not found
  *       '500':
  *         description: Internal server error
  */
