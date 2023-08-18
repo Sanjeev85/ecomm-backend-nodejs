@@ -19,7 +19,10 @@
 
 #### All Routes are available in  routes.http file
 
-### Note <color>This project uses local mongodb database  </color>
+### Note 
+    1. This project uses local mongodb database 
+    2. Categories to be created first to be able to add products to cart
+
 
 ### setup
   1. Clone repository by using git clone https://github.com/Sanjeev85/ecomm-backend-nodejs.git
