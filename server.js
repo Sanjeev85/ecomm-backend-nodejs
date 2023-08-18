@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import gzip from 'gzip';
 import authRoute from './routes/auth.route.js';
@@ -8,6 +8,8 @@ import { verifyToken } from './middleware/jwt.js';
 import categoryRoute from './routes/catergory.route.js';
 import productRoute from './routes/product.route.js';
 import userRoute from './routes/user.route.js';
+import rateLimit from 'express-rate-limit';
+import setupSwagger from './swagger.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,9 +27,17 @@ const connect = async () => {
   }
 };
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
 app.use(cors());
 app.use(express.json());
 dotenv.config();
+
+setupSwagger(app);
 
 // ! initial routes
 
